@@ -19,9 +19,11 @@ import {
 	FormMessage,
 } from "@/components/ui/form"
 import { authformSchema } from "@/lib/utils"
+import { Loader2 } from "lucide-react"
 
 const AuthForm = ({ type }: { type: string }) => {
 	const [user, setUser] = useState(null)
+	const [isLoading, setIsLoading] = useState(false)
 
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof authformSchema>>({
@@ -36,7 +38,9 @@ const AuthForm = ({ type }: { type: string }) => {
 	function onSubmit(values: z.infer<typeof authformSchema>) {
 		// Do something with the form values.
 		// ✅ This will be type-safe and validated.
+		setIsLoading(true)
 		console.log(values)
+		setIsLoading(false)
 	}
 	return (
 		<section className='auth-form'>
@@ -73,7 +77,18 @@ const AuthForm = ({ type }: { type: string }) => {
 								placeholder='Enter your password'
 							/>
 
-							<Button type='submit' className="form-btn">Submit</Button>
+							<Button type='submit' disabled={isLoading} className='form-btn'>
+								{isLoading ? (
+									<>
+										<Loader2 size={20} className='animate-spin' />
+										Loading...
+									</>
+								) : type === "sign-in" ? (
+									"Sign In"
+								) : (
+									"Sign Up"
+								)}
+							</Button>
 						</form>
 					</Form>
 				</>
