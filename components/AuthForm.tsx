@@ -80,7 +80,7 @@ const AuthForm = ({ type }: { type: string }) => {
 									/>
 									<CustomInput
 										control={form.control}
-										name='address'
+										name='address1'
 										label='Address'
 										placeholder='Enter your address'
 									/>
@@ -101,6 +101,12 @@ const AuthForm = ({ type }: { type: string }) => {
 										name='dateOfBirth'
 										label='Date of Birth'
 										placeholder='DD-MM-YYYY'
+									/>
+									<CustomInput
+										control={form.control}
+										name='ssn'
+										label='SSN'
+										placeholder='Enter your SSN'
 									/>
 								</>
 							)}
