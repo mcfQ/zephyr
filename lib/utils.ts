@@ -64,7 +64,19 @@ export function formatAmount(amount: number): string {
 	return formatter.format(amount)
 }
 
-export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value))
+export const parseStringify = (value: any) => {
+	if (value === undefined) {
+		console.error("Cannot stringify and parse undefined value")
+		return undefined
+	}
+
+	try {
+		return JSON.parse(JSON.stringify(value))
+	} catch (error) {
+		console.error("Error in stringify and parse operation", error)
+		return undefined
+	}
+}
 
 export const removeSpecialCharacters = (value: string) => {
 	return value.replace(/[^\w\s]/gi, "")

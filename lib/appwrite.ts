@@ -11,6 +11,7 @@ export async function createSessionClient() {
 	const session = cookies().get("appwrite-session")
 
 	if (!session || !session.value) {
+		console.error("Session cookie is missing or empty")
 		throw new Error("No session")
 	}
 

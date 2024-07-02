@@ -9,7 +9,7 @@ const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) =>
 			<Link href='/' className='bank-card'>
 				<div className='bank-card_content'>
 					<div>
-						<h1 className='text-16 font-semibold text-white'>{account.name || userName}</h1>
+						<h1 className='text-16 font-semibold text-white'>{userName}</h1>
 						<p className='font-ibm-plex-serif font-black text-white'>
 							{formatAmount(account.currentBalance)}
 						</p>
@@ -28,7 +28,13 @@ const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) =>
 				</div>
 				<div className='bank-card_icon'>
 					<Image src='/icons/Paypass.svg' width={20} height={24} alt='pay' />
-					<Image src='/icons/mastercard.svg' width={45} height={32} alt='mastercard' className="ml-5"/>
+					<Image
+						src='/icons/mastercard.svg'
+						width={45}
+						height={32}
+						alt='mastercard'
+						className='ml-5'
+					/>
 				</div>
 				<Image
 					src='/icons/lines.png'
