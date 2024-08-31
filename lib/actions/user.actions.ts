@@ -113,8 +113,9 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
 export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
+    const result = await account.get();
 
-    const user = await account.get();
+    const user = await getUserInfo({ userId: result.$id });
 
     return parseStringify(user);
   } catch (error) {
@@ -269,8 +270,13 @@ export const getBank = async ({ documentId }: getBankProps) => {
       BANK_COLLECTION_ID!,
       [Query.equal("$id", documentId)],
     );
+    if (bank.documents.length === 0) {
+      console.log(`No bank found with documentId: ${documentId}`);
+      return null;
+    }
     return parseStringify(bank.documents[0]);
   } catch (error) {
-    console.log(error);
+    console.error("Error in getBank:", error);
+    throw error; // Re-throw the error to be caught in the calling function
   }
 };
