@@ -6,10 +6,17 @@ const TotalBalanceBox = ({
   totalBanks,
   totalCurrentBalance,
 }: TotalBalanceBoxProps) => {
+  // Flatten the accounts array
+  const flattenedAccounts = accounts.flat();
+
+  console.log("Flattened accounts:", flattenedAccounts);
+
   return (
     <section className="total-balance">
       <div className="total-balance-chart">
-        <DoughnutChart accounts={accounts} />
+        {flattenedAccounts.length > 0 && (
+          <DoughnutChart accounts={flattenedAccounts} />
+        )}
       </div>
 
       <div className="flex flex-col gap-6">
