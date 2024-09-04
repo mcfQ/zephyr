@@ -1,5 +1,5 @@
 import AnimatedCounter from "./AnimatedCounter";
-import DoughnutChart from "./DoughnutChart";
+import FinancialSummaryCards from "./FinancialSummaryCards";
 
 const TotalBalanceBox = ({
   accounts = [],
@@ -8,16 +8,18 @@ const TotalBalanceBox = ({
 }: TotalBalanceBoxProps) => {
   // Flatten the accounts array
   const flattenedAccounts = accounts.flat();
+  const monthlySpending = 2000;
+  const savingsGoal = 10000;
 
   console.log("Flattened accounts:", flattenedAccounts);
 
   return (
     <section className="total-balance">
-      <div className="total-balance-chart">
-        {flattenedAccounts.length > 0 && (
-          <DoughnutChart accounts={flattenedAccounts} />
-        )}
-      </div>
+      <FinancialSummaryCards
+        totalBalance={totalCurrentBalance}
+        monthlySpending={monthlySpending}
+        savingsGoal={savingsGoal}
+      />
 
       <div className="flex flex-col gap-6">
         <h2 className="header-2">Bank Accounts: {totalBanks}</h2>
