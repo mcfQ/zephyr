@@ -1,24 +1,7 @@
-import Image from "next/image"
-
 export default function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode
+  children: React.ReactNode;
 }>) {
-	return (
-		<main className='flex min-h-screen w-full justify-between font-inter'>
-			{children}
-			<div className='auth-asset'>
-				<div>
-					<Image
-						src='/icons/auth-image.svg'
-						alt='Auth image'
-						width={600}
-						height={600}
-						className='rounded-l-xl object-contain'
-					/>
-				</div>
-			</div>
-		</main>
-	)
+  return <main className="auth-asset">{children}</main>;
 }
