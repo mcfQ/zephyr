@@ -328,3 +328,10 @@ declare interface getBankProps {
 declare interface getBankByAccountIdProps {
   accountId: string;
 }
+
+declare interface FinancialSummaryProps {
+  totalBalance: number;
+  monthlySpending: number;
+  savingsGoal: number;
+  onUpdateSavingsGoal: (newGoal: number) => void;
+}
