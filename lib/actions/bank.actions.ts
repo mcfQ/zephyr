@@ -189,3 +189,34 @@ export const getTransactions = async ({
     console.error("An error occurred while getting the accounts:", error);
   }
 };
+
+export const calculateMonthlySpending = async (bankId: string) => {
+  const currentDate = new Date();
+  const firstDayOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1,
+  );
+
+  const transactionsData = await getTransactionsByBankId({ bankId });
+
+  if (!transactionsData || !transactionsData.documents) {
+    console.error("No transaction data available");
+    return 0;
+  }
+
+  const monthlyTransactions = transactionsData.documents.filter((t) => {
+    const transactionDate = new Date(t.$createdAt);
+    return transactionDate >= firstDayOfMonth && transactionDate <= currentDate;
+  });
+
+  const totalSpending = monthlyTransactions.reduce((total, t) => {
+    // Assuming outgoing transactions (sender) are expenses
+    if (t.senderBankId === bankId) {
+      return total + Math.abs(t.amount);
+    }
+    return total;
+  }, 0);
+
+  return totalSpending;
+};

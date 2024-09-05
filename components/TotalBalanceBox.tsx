@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import AnimatedCounter from "./AnimatedCounter";
 import FinancialSummaryCards from "./FinancialSummaryCards";
+import { calculateMonthlySpending } from "@/lib/actions/bank.actions";
 
 const TotalBalanceBox = ({
   accounts = [],
@@ -7,14 +11,26 @@ const TotalBalanceBox = ({
   totalCurrentBalance,
 }: TotalBalanceBoxProps) => {
   // Flatten the accounts array
+  const [monthlySpending, setMonthlySpending] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchMonthlySpending = async () => {
+      if (accounts.length > 0) {
+        const bankId = accounts[0].appwriteItemId;
+        const spending = await calculateMonthlySpending(bankId);
+        setMonthlySpending(spending);
+      }
+    };
+
+    fetchMonthlySpending();
+  });
   const flattenedAccounts = accounts.flat();
-  const monthlySpending = 2000;
   const savingsGoal = 10000;
 
   console.log("Flattened accounts:", flattenedAccounts);
 
   return (
-    <section className="total-balance">
+    <section className="total-balance grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <FinancialSummaryCards
         totalBalance={totalCurrentBalance}
         monthlySpending={monthlySpending}
