@@ -153,6 +153,30 @@
     @apply custom-scrollbar mb-8 flex w-full flex-nowrap;
   }
 
+  .transaction-table-container {
+    @apply bg-white shadow-md rounded-lg overflow-hidden;
+  }
+
+  .transaction-row {
+    @apply hover:bg-gray-50 transition-colors;
+  }
+
+  .transaction-cell {
+    @apply py-4 px-6;
+  }
+
+  .transaction-amount {
+    @apply text-sm font-semibold;
+  }
+
+  .transaction-date {
+    @apply text-sm text-gray-600;
+  }
+
+  .transaction-channel {
+    @apply text-sm text-gray-600 capitalize;
+  }
+
   /* Right sidebar */
   .right-sidebar {
     @apply no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll !important;
@@ -240,7 +264,7 @@
 
   /* Category Badge */
   .category-badge {
-    @apply flex-center truncate w-fit gap-1 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2;
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
   }
 
   .banktab-item {

@@ -41,7 +41,7 @@ const BankCard = ({
             width={45}
             height={32}
             alt="mastercard"
-            className="ml-5"
+            className="ml-8"
           />
         </div>
         <Image
