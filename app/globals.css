@@ -256,7 +256,6 @@
   .bank-card_icon {
     @apply flex size-full flex-1 flex-col items-end justify-between rounded-r-[20px] bg-bank-gradient bg-cover bg-center bg-no-repeat py-5 pr-5;
   }
-
   /* Bank Info */
   .bank-info {
     @apply gap-[18px] flex p-4 transition-all border bg-blue-25 border-transparent;

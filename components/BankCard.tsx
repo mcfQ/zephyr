@@ -1,19 +1,29 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import { formatAmount } from "@/lib/utils";
 import Image from "next/image";
-import Copy from "./Copy";
+import { Copy, Check } from "lucide-react";
 
 const BankCard = ({
   account,
   userName,
   showBalance = true,
 }: CreditCardProps) => {
+  const [hasCopied, setHasCopied] = useState(false);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(account?.shareableId);
+    setHasCopied(true);
+    setTimeout(() => setHasCopied(false), 2000);
+  };
+
   return (
-    <div className="flex flex-col">
+    <div className="relative group">
       <Link
         href={`/transaction-history/?id=${account.appwriteItemId}`}
-        className="bank-card"
+        className="bank-card block relative"
       >
         <div className="bank-card_content">
           <div>
@@ -26,7 +36,6 @@ const BankCard = ({
           <article className="flex flex-col gap-2">
             <div className="flex justify-between">
               <h1 className="text-12 font-semibold text-white">{userName}</h1>
-
               <h2 className="text-12 font-semibold text-white">●●/●●</h2>
             </div>
             <p className="text-14 font-semibold tracking-[] text-white">
@@ -41,7 +50,7 @@ const BankCard = ({
             width={45}
             height={32}
             alt="mastercard"
-            className="ml-8"
+            className="ml-14"
           />
         </div>
         <Image
@@ -52,7 +61,17 @@ const BankCard = ({
           className="absolute top-0 left-0"
         />
       </Link>
-      {showBalance && <Copy title={account?.shareableId} />}
+      <button
+        onClick={copyToClipboard}
+        className="absolute top-2 right-2 p-2 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        title="Copy card ID"
+      >
+        {hasCopied ? (
+          <Check className="h-4 w-4 text-white" />
+        ) : (
+          <Copy className="h-4 w-4 text-white" />
+        )}
+      </button>
     </div>
   );
 };
