@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Zephyr FinTech Banking Application
 
 Zephyr is a FinTech banking platform built using **Next.js**. It includes features like secure user authentication, transaction history, and financial insights.
 
